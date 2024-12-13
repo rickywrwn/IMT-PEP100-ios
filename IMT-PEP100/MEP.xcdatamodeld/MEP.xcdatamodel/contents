@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E224" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ExerciseResult" representedClassName="ExerciseResult" syncable="YES" codeGenerationType="class">
+        <attribute name="accuracy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="exerciseType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="mep" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" customClassName="[Double]"/>
+        <attribute name="mip" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" customClassName="[Double]"/>
+        <attribute name="restTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalTime" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="exerciseResults" inverseEntity="User"/>
+    </entity>
+    <entity name="ExerciseSetting" representedClassName="ExerciseSetting" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="exerciseType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="mepPressureRatio" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mepTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mipPressureRatio" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mipTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="restTime" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="setCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="exerciseSettings" inverseEntity="User"/>
+    </entity>
+    <entity name="LungMeasurement" representedClassName="LungMeasurement" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="fef_25_to_75" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fev1" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="fev1_to_fvc_ratio" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fvc" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="mvv" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="pef" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="measurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Measurement" inverseName="lungMeasurement" inverseEntity="Measurement"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="lungMeasurements" inverseEntity="User"/>
+    </entity>
+    <entity name="Measurement" representedClassName="Measurement" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="lungMeasurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LungMeasurement" inverseName="measurements" inverseEntity="LungMeasurement"/>
+        <relationship name="mepMeasurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MEPMeasurement" inverseName="measurements" inverseEntity="MEPMeasurement"/>
+        <relationship name="mipMeasurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MIPMeasurement" inverseName="measurements" inverseEntity="MIPMeasurement"/>
+    </entity>
+    <entity name="MEPMeasurement" representedClassName="MEPMeasurement" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="measurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Measurement" inverseName="mepMeasurement" inverseEntity="Measurement"/>
+        <relationship name="respiratoryMeasurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RespiratoryMeasurement" inverseName="mepMeasurements" inverseEntity="RespiratoryMeasurement"/>
+    </entity>
+    <entity name="MIPMeasurement" representedClassName="MIPMeasurement" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="measurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Measurement" inverseName="mipMeasurement" inverseEntity="Measurement"/>
+        <relationship name="respiratoryMeasurement" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RespiratoryMeasurement" inverseName="mipMeasurements" inverseEntity="RespiratoryMeasurement"/>
+    </entity>
+    <entity name="RespiratoryMeasurement" representedClassName="RespiratoryMeasurement" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="maxMEP" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="maxMIP" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mepAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mepReproducibility" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="mipAge" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mipReproducibility" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="mepMeasurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MEPMeasurement" inverseName="respiratoryMeasurement" inverseEntity="MEPMeasurement"/>
+        <relationship name="mipMeasurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MIPMeasurement" inverseName="respiratoryMeasurement" inverseEntity="MIPMeasurement"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="respiratoryMeasurements" inverseEntity="User"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isSelected" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="race" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="weight" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="exerciseResults" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseResult" inverseName="user" inverseEntity="ExerciseResult"/>
+        <relationship name="exerciseSettings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseSetting" inverseName="user" inverseEntity="ExerciseSetting"/>
+        <relationship name="lungMeasurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LungMeasurement" inverseName="user" inverseEntity="LungMeasurement"/>
+        <relationship name="respiratoryMeasurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RespiratoryMeasurement" inverseName="user" inverseEntity="RespiratoryMeasurement"/>
+    </entity>
+</model>
